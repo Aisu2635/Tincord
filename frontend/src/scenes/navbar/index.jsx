@@ -19,8 +19,8 @@ const NavPg = () => {
     const priTheme = theme.palette.primary.light;
     const alt = theme.palette.primary.dark;
 
-    // const fullname = `${user.F_name} ${user.L_name}`;
-    const fullname = "Bit Nub";
+    const fullname = `${user.F_name} ${user.L_name}`;
+    // const fullname = "Bit Nub";
 
     return (<FlexB padding="1rem 6%" backgroundcolor={alt}>
         <FlexB gap="1.75rem">
@@ -43,7 +43,7 @@ const NavPg = () => {
                 borderRadius="8px"
                 gap="3rem"
                 padding="0.1rem 1.5rem"
-              >
+                >
                     <InputBase placeholder="Search..."/>
                     <IconButton>
                         <Search/>
@@ -89,14 +89,14 @@ const NavPg = () => {
     </FlexB>
     ) : (
         <IconButton
-          onClick={() => setisMobile(!isMobile)}
+        onClick={() => setisMobile(!isMobile)}
         >
-          <Menu />
+        <Menu />
         </IconButton>
-      )}
+    )}
 
       {/* MOBILE NAV */}
-      {!isPc && isMobile && (
+    {!isPc && isMobile && (
         <Box
             position="fixed"
             right= "0"
@@ -157,7 +157,7 @@ const NavPg = () => {
         </FlexB>    
         </Box>
         )}
-      </FlexB>
+    </FlexB>
     );
 };
 
