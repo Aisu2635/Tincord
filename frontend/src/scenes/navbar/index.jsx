@@ -20,7 +20,7 @@ const NavPg = () => {
     const alt = theme.palette.primary.dark;
 
     const fullname = `${user.F_name} ${user.L_name}`;
-    // const fullname = "Bit Nub";
+    //const fullname = "Bit Nub";
 
     return (<FlexB padding="1rem 6%" backgroundcolor={alt}>
         <FlexB gap="1.75rem">

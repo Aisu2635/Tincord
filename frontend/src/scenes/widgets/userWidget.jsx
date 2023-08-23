@@ -12,7 +12,7 @@ import {
  import { useEffect , useState } from "react";
  import { useNavigate } from "react-router-dom";
 
- const userWidget = ({ userId, picturePath}) => {
+ const userWidget = ({ userId, picture_path}) => {
     const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
@@ -59,7 +59,7 @@ import {
             onClick={()=> navigate(`/profile/${userId}`)}
             >
                 <FlexB gap="1rem">
-                    <Userimage image={picturePath} />
+                    <Userimage image={picture_path} />
                     <Box>
                         <Typography 
                         variant ="h4"
