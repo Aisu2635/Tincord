@@ -51,7 +51,7 @@ const Form = () => {
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isPC = useMediaQuery("(min-width:500px)");
+  const isPC = useMediaQuery("(min-width:600px)");
   const islog = pageType === "login";
   const isreg = pageType === "register";
 
@@ -65,6 +65,7 @@ const Form = () => {
     const savedUserResponse = await fetch("http://localhost:3001/auth/register",
       {
         method: "POST",
+        enctype:"multipart/form-data",
         body: formData,
       }
     );
