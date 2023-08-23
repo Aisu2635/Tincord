@@ -35,11 +35,11 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* File storage */
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: function (req, file, cb) {
         cb(null, 'public/assets');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        cb(null,file.originalname);
     }
 });
 const upload = multer({storage});
@@ -53,7 +53,7 @@ app.use('/auth', authroute);
 app.use("/users", userRoute);
 app.use('/posts', postRoute);
 /* mongoose */
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,

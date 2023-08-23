@@ -19,13 +19,13 @@ import {
 } from "@mui/material";
 import FlexB from "components/flexB";
 import Dropzone from "react-dropzone";
-import UserImage from "components/UserImage";
-import WidgetWrapper from "components/WidgetWrapper";
+import Userimage from "components/Userimage";
+import Widgetwrapper from "components/widgetwrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 
-const MyPostWidget = ({ picture_path }) => {
+const MyPostWid = ({ picture_path }) => {
 const dispatch = useDispatch();
 const [isImage, setIsImage] = useState(false);
 const [image, setImage] = useState(null);
@@ -58,9 +58,9 @@ const handlePost = async () => {
   };
 
   return (
-    <WidgetWrapper>
+    <Widgetwrapper>
       <FlexB gap="1.5rem">
-        <UserImage image={picture_path} />
+        <Userimage image={picture_path} />
         <InputBase
           placeholder="What's on your mind..."
           onChange={(e) => setPost(e.target.value)}
@@ -160,7 +160,7 @@ const handlePost = async () => {
           POST
         </Button>
       </FlexB>
-    </WidgetWrapper>
+    </Widgetwrapper>
   );
 };
 

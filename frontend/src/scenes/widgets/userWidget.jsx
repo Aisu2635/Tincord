@@ -1,18 +1,18 @@
 import {
-    ManageAccountOutlined,
+    ManageAccountsOutlined,
     EditOutlined,
-    LocationOnOutilined,
+    LocationOnOutlined,
     WorkOutlineOutlined,
  } from "@mui/icons-material";
  import { Box, Typography, Divider, useTheme} from "@mui/material";
  import Userimage from "components/Userimage";
  import FlexB from "components/flexB";
- import widgetwrapper from "components/widgetwrapper";
+ import Widgetwrapper from "components/widgetwrapper";
  import { useSelector } from "react-redux";
  import { useEffect , useState } from "react";
  import { useNavigate } from "react-router-dom";
 
- const userWidget = ({ userId, picture_path}) => {
+const UserWidget = ({ userId, picture_path}) => {
     const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
@@ -41,17 +41,17 @@ import {
     }
 
     const{
-        firstName,
-        lastName,
+        F_name,
+        L_name,
         location,
         occupation,
         viewedProfile,
         impresions,
-        friends, 
+        friend, 
     } = user;
 
     return(
-        <widgetwrapper>
+        <Widgetwrapper>
             {/*FIRST ROW*/}
             <FlexB
             gap="0.5rem"
@@ -71,20 +71,20 @@ import {
                                 cursor: "pointer"
                             }
                         }}>
-                            {firstName} {lastName}
+                            {F_name} {L_name}
                         </Typography>
-                        <Typography color={medium}>{friends.length} friends </Typography>
+                        <Typography color={medium}>{friend.length} friend </Typography>
                         </Box>
                         
                 </FlexB>
-                <ManageAccountOutlined/>
+                <ManageAccountsOutlined/>
                 </FlexB>
 
                 <Divider/>
                 {/*SECOND ROW*/}  
                 <Box p="1rem 0">
                   <Box display ="flex"  alignItems="center" gap="1rem" mb="0.5rem">
-                    <LocationOnOutilined fontSize="large" sx={{color:main}}/>
+                    <LocationOnOutlined fontSize="large" sx={{color:main}}/>
                     <Typography color={medium}>{location}</Typography>
                   </Box>
                   <Box display ="flex"  alignItems="center" gap="1rem">
@@ -148,7 +148,7 @@ import {
                 </Box>
 
              
-        </widgetwrapper>
+        </Widgetwrapper>
     );
  };
- export default userWidget;
+ export default UserWidget;

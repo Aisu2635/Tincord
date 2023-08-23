@@ -60,12 +60,11 @@ const Form = () => {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picture", values.picture_path.name);
+    formData.append("picturePath", values.picture_path.name);
 
     const savedUserResponse = await fetch("http://localhost:3001/auth/register",
       {
         method: "POST",
-        enctype:"multipart/form-data",
         body: formData,
       }
     );
@@ -88,7 +87,7 @@ const Form = () => {
     if (loggedIn) {
       dispatch(
         setLogin({
-          user: loggedIn.user,
+          user: loggedIn.User,
           token: loggedIn.token,
         })
       );
@@ -179,7 +178,7 @@ const Form = () => {
                   p="1rem"
                 >
                   <Dropzone
-                    acceptedFiles=".jpg,.jpeg,.png"
+                    acceptedFiles=".jpg,.jpeg,.png,.gif"
                     multiple={false}
                     onDrop={(acceptedFiles) =>
                       setFieldValue("picture_path", acceptedFiles[0])
@@ -194,7 +193,7 @@ const Form = () => {
                       >
                         <input {...getInputProps()} />
                         {!values.picture_path ? (
-                          <p>Add picture_path Here</p>
+                          <p>Add picture Here</p>
                         ) : (
                           <FlexB>
                             <Typography>{values.picture_path.name}</Typography>

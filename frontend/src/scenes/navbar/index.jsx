@@ -10,7 +10,7 @@ const NavPg = () => {
     const {isMobile, setisMobile} = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.User);
     const isPc = useMediaQuery("(min-width: 1000px)");
     const theme = useTheme();
     const neuTheme = theme.palette.neutral.light;

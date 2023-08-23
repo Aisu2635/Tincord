@@ -8,7 +8,7 @@ export const getUser = async (req, res) => {
         res.status(200).json(user);
 
     }catch (error) {
-        res.status(500).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
+        res.status(404).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
     }
 };
 
@@ -17,13 +17,13 @@ export const getUserFriends = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id);
     const friends = await Promise.all(
-        user.friend.map((id) => User.findById(id))
+        user.friends.map((id) => User.findById(id))
     );
-    const formattedFriends = friends.map(({ _id, F_name, L_name, pic_path }) => 
-    ({return : { _id, F_name, L_name, pic_path }}));
+    const formattedFriends = friends.map(({ _id, F_name, L_name, picture_path }) => 
+    ({return : { _id, F_name, L_name, picture_path }}));
     res.status(200).json(formattedFriends);
     }catch (error) {
-        res.status(500).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
+        res.status(404).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
     }
 };
 
@@ -47,11 +47,11 @@ export const addRemoveFriend = async (req, res) => {
         const friends = await Promise.all(
             user.friend.map((id) => User.findById(id))
         );
-        const formattedFriends = friends.map(({ _id, F_name, L_name, pic_path }) => 
-        ({return : { _id, F_name, L_name, pic_path }}));
+        const formattedFriends = friends.map(({ _id, F_name, L_name, picture_path }) => 
+        ({return : { _id, F_name, L_name, picture_path }}));
         res.status(200).json(formattedFriends);
 
     } catch (error) {
-        res.status(500).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
+        res.status(404).json({ message: "Daya Kuch toh Gadbad hai" + error.message });
     };
 };

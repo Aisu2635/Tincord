@@ -1,8 +1,10 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 import NavPg from 'scenes/navbar';
-import userWidget from 'scenes/widgets/userWidget';
-import Mypostwid from 'scenes/widgets/mypostwid';
+import UserWidget from 'scenes/widgets/userWidget';
+import MyPostWid from 'scenes/widgets/mypostwid';
+import PostsWidget from "scenes/widgets/PostsWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
 
 const HomePg = () => {
     const isPC = useMediaQuery("(min-width:1000px)");
@@ -19,14 +21,18 @@ const HomePg = () => {
         justifyContent = "space-between"
         >
         <Box flexBasis={isPC? "26%" :undefined}>
-            <userWidget userId={_id} picturePath={picture_path}/>
+            <UserWidget userId={_id} picturePath={picture_path}/>
         </Box>
         <Box
         flexBasis={isPC? "42%" :undefined}
             mt={isPC ? undefined : "2rem"}
-            ></Box>
-        {isPC && <Box flexBasis="26%"></Box>}
-    
+            >
+        <MyPostWid picturePath={picture_path} />
+        <PostsWidget userId={_id} />
+            </Box>
+        {isPC && (<Box flexBasis="26%"><Box m="2rem 0" />
+            <FriendListWidget userId={_id} />
+            </Box>)}
         </Box>
     </Box>
     );

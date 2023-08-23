@@ -4,7 +4,7 @@ import Form from "./Form";
 const LoginPg = () => {
     const theme = useTheme();
     const isPc = useMediaQuery("(min-width: 1000px)");
-    return <Box>
+    return (<Box>
         <Box width="100px" 
         backgroundColor={theme.palette.background.alt} 
         p="1rem 6%" 
@@ -26,9 +26,10 @@ const LoginPg = () => {
             <Typography fontWeight="500" variant="h5" sx={{mb:"1.5rem"}}>
                 Welcome to Tincord!, By the noobs, for the noobs.
             </Typography>
-        <Form></Form>
+        <Form />
         </Box>
         </Box>
+    );
 };
 
 export default LoginPg;
