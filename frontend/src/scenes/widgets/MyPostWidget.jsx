@@ -81,7 +81,7 @@ const MyPostWidget = ({ picturePath }) => {
           p="1rem"
         >
           <Dropzone
-            acceptedFiles=".jpg,.jpeg,.png"
+            acceptedFiles=".jpg,.jpeg,.png,.gif"
             multiple={false}
             onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
           >
@@ -158,7 +158,7 @@ const MyPostWidget = ({ picturePath }) => {
           disabled={!post}
           onClick={handlePost}
           sx={{
-            color: palette.background.alt,
+            color: "white",
             backgroundColor: palette.primary.main,
             borderRadius: "3rem",
           }}

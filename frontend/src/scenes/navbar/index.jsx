@@ -56,7 +56,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          Tincord
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
