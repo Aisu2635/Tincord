@@ -3,10 +3,10 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFriends } from "state";
-import FlexB from "./flexB";
-import Userimage from "./Userimage";
+import FlexBetween from "./FlexBetween";
+import UserImage from "./UserImage";
 
-const Friend = ({ friendId, name, subtitle, userpicture_path }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -37,9 +37,9 @@ const Friend = ({ friendId, name, subtitle, userpicture_path }) => {
   };
 
   return (
-    <FlexB>
-      <FlexB gap="1rem">
-        <Userimage image={userpicture_path} size="55px" />
+    <FlexBetween>
+      <FlexBetween gap="1rem">
+        <UserImage image={userPicturePath} size="55px" />
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
@@ -63,7 +63,7 @@ const Friend = ({ friendId, name, subtitle, userpicture_path }) => {
             {subtitle}
           </Typography>
         </Box>
-      </FlexB>
+      </FlexBetween>
       <IconButton
         onClick={() => patchFriend()}
         sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
@@ -74,7 +74,7 @@ const Friend = ({ friendId, name, subtitle, userpicture_path }) => {
           <PersonAddOutlined sx={{ color: primaryDark }} />
         )}
       </IconButton>
-    </FlexB>
+    </FlexBetween>
   );
 };
 

@@ -5,9 +5,9 @@ import {
   ShareOutlined,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
-import FlexB from "components/flexB";
+import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
-import WidgetWrapper from "components/widgetwrapper";
+import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
@@ -18,8 +18,8 @@ const PostWidget = ({
   name,
   description,
   location,
-  picture_path,
-  userPicture_path,
+  picturePath,
+  userPicturePath,
   likes,
   comments,
 }) => {
@@ -53,23 +53,23 @@ const PostWidget = ({
         friendId={postUserId}
         name={name}
         subtitle={location}
-        userPicture_path={userPicture_path}
+        userPicturePath={userPicturePath}
       />
       <Typography color={main} sx={{ mt: "1rem" }}>
         {description}
       </Typography>
-      {picture_path && (
+      {picturePath && (
         <img
           width="100%"
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:3001/assets/${picture_path}`}
+          src={`http://localhost:3001/assets/${picturePath}`}
         />
       )}
-      <FlexB mt="0.25rem">
-        <FlexB gap="1rem">
-          <FlexB gap="0.3rem">
+      <FlexBetween mt="0.25rem">
+        <FlexBetween gap="1rem">
+          <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
               {isLiked ? (
                 <FavoriteOutlined sx={{ color: primary }} />
@@ -78,20 +78,20 @@ const PostWidget = ({
               )}
             </IconButton>
             <Typography>{likeCount}</Typography>
-          </FlexB>
+          </FlexBetween>
 
-          <FlexB gap="0.3rem">
+          <FlexBetween gap="0.3rem">
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
             <Typography>{comments.length}</Typography>
-          </FlexB>
-        </FlexB>
+          </FlexBetween>
+        </FlexBetween>
 
         <IconButton>
           <ShareOutlined />
         </IconButton>
-      </FlexB>
+      </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
