@@ -14,31 +14,31 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
-import FlexB from "components/flexB";
+import FlexBetween from "components/FlexBetween";
 
 const registerSchema = yup.object().shape({
-  F_name: yup.string().required("required"),
-  L_name: yup.string().required("required"),
-  email: yup.string().email("Email me gadbad hai").required("required"),
+  firstName: yup.string().required("required"),
+  lastName: yup.string().required("required"),
+  email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
-  picture_path: yup.string().required("required"),
+  picture: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
-  email: yup.string().email("Email me gadbad hai").required("required"),
+  email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
 });
 
 const initialValuesRegister = {
-  F_name: "",
-  L_name: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
   location: "",
   occupation: "",
-  picture_path: "",
+  picture: "",
 };
 
 const initialValuesLogin = {
@@ -51,21 +51,22 @@ const Form = () => {
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isPC = useMediaQuery("(min-width:600px)");
-  const islog = pageType === "login";
-  const isreg = pageType === "register";
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const isLogin = pageType === "login";
+  const isRegister = pageType === "register";
 
   const register = async (values, onSubmitProps) => {
+    // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picture", values.picture_path.name);
+    formData.append("picturePath", values.picture.name);
 
-    const savedUserResponse = await fetch("http://localhost:3001/auth/register",
+    const savedUserResponse = await fetch(
+      "http://localhost:3001/auth/register",
       {
         method: "POST",
-        enctype:"multipart/form-data",
         body: formData,
       }
     );
@@ -97,15 +98,15 @@ const Form = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    if (islog) await login(values, onSubmitProps);
-    if (isreg) await register(values, onSubmitProps);
+    if (isLogin) await login(values, onSubmitProps);
+    if (isRegister) await register(values, onSubmitProps);
   };
 
   return (
     <Formik
       onSubmit={handleFormSubmit}
-      initialValues={islog ? initialValuesLogin : initialValuesRegister}
-      validationSchema={islog ? loginSchema : registerSchema}
+      initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
+      validationSchema={isLogin ? loginSchema : registerSchema}
     >
       {({
         values,
@@ -123,31 +124,31 @@ const Form = () => {
             gap="30px"
             gridTemplateColumns="repeat(4, minmax(0, 1fr))"
             sx={{
-              "& > div": { gridColumn: isPC ? undefined : "span 4" },
+              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
             }}
           >
-            {isreg && (
+            {isRegister && (
               <>
                 <TextField
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.F_name}
-                  name="F_name"
+                  value={values.firstName}
+                  name="firstName"
                   error={
-                    Boolean(touched.F_name) && Boolean(errors.F_name)
+                    Boolean(touched.firstName) && Boolean(errors.firstName)
                   }
-                  helperText={touched.F_name && errors.F_name}
+                  helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
                   label="Last Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.L_name}
-                  name="L_name"
-                  error={Boolean(touched.L_name) && Boolean(errors.L_name)}
-                  helperText={touched.L_name && errors.L_name}
+                  value={values.lastName}
+                  name="lastName"
+                  error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                  helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -182,7 +183,7 @@ const Form = () => {
                     acceptedFiles=".jpg,.jpeg,.png"
                     multiple={false}
                     onDrop={(acceptedFiles) =>
-                      setFieldValue("picture_path", acceptedFiles[0])
+                      setFieldValue("picture", acceptedFiles[0])
                     }
                   >
                     {({ getRootProps, getInputProps }) => (
@@ -193,13 +194,13 @@ const Form = () => {
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
                         <input {...getInputProps()} />
-                        {!values.picture_path ? (
-                          <p>Add picture_path Here</p>
+                        {!values.picture ? (
+                          <p>Add Picture Here</p>
                         ) : (
-                          <FlexB>
-                            <Typography>{values.picture_path.name}</Typography>
+                          <FlexBetween>
+                            <Typography>{values.picture.name}</Typography>
                             <EditOutlinedIcon />
-                          </FlexB>
+                          </FlexBetween>
                         )}
                       </Box>
                     )}
@@ -244,11 +245,11 @@ const Form = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              {islog ? "LOGIN" : "REGISTER"}
+              {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
             <Typography
               onClick={() => {
-                setPageType(islog ? "register" : "login");
+                setPageType(isLogin ? "register" : "login");
                 resetForm();
               }}
               sx={{
@@ -260,7 +261,7 @@ const Form = () => {
                 },
               }}
             >
-              {islog
+              {isLogin
                 ? "Don't have an account? Sign Up here."
                 : "Already have an account? Login here."}
             </Typography>
